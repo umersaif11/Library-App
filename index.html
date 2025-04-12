@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library App</title>
+    <link rel="stylesheet" href="./styles.css">
+    
+</head>
+<body>
+
+    <div id="main-container">
+
+    </div>
+    
+    
+    <script>
+        const myLibrary = [
+  {
+    id: crypto.randomUUID(),
+    title: "To Kill a Mockingbird",
+    author: "Harper Lee",
+    pages: 281,
+    read: "Read"
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "1984",
+    author: "George Orwell",
+    pages: 328,
+    read: "Read"
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "Pride and Prejudice",
+    author: "Jane Austen",
+    pages: 432,
+    read: "Read"
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "The Great Gatsby",
+    author: "F. Scott Fitzgerald",
+    pages: 180,
+    read: "Not Read"
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "The Catcher in the Rye",
+    author: "J.D. Salinger",
+    pages: 234,
+    read: "Read"
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "Harry Potter and the Sorcerer's Stone",
+    author: "J.K. Rowling",
+    pages: 309,
+    read: "Read"
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "The Lord of the Rings",
+    author: "J.R.R. Tolkien",
+    pages: 1178,
+    read: "Currently Reading"
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "The Little Prince",
+    author: "Antoine de Saint-Exupéry",
+    pages: 96,
+    read: "Read"
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "The Alchemist",
+    author: "Paulo Coelho",
+    pages: 197,
+    read: "Read"
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "One Hundred Years of Solitude",
+    author: "Gabriel García Márquez",
+    pages: 417,
+    read: "Not Read"
+  }
+];
+
+        function Book(title, author, pages, read){
+          this.id = crypto.randomUUID();  
+          this.title = title;
+          this.author = author;
+          this.pages = pages;
+          this.read = read;  
+        }
+        //Book.prototype.info = function(){
+        //    return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read} yet`;
+        //};
+
+        function addBookToLibrary(title, author, pages, read){
+           return myLibrary.push(new Book(title, author, pages, read));
+        } 
+
+        
+
+        
+    </script>
+</body>
+</html>
