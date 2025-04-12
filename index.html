@@ -103,7 +103,54 @@
            return myLibrary.push(new Book(title, author, pages, read));
         } 
 
+        console.log(addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', 295, 'not read'));
+        //console.log(myLibrary[0].info());
+
+        let mainDiv = document.getElementById("main-container");
+        for (let i = 0; i < myLibrary.length; i++){
+            let container = document.createElement("div");
+            container.style.cssText = "flex: 1 1 200px; display: flex; min-width: 150px; flex-direction: column;";
+            container.style.border = "1px solid red";
+            mainDiv.appendChild(container);
+
+            let titleContainer = document.createElement("div");
+            titleContainer.style.cssText = "height: auto; background: peachpuff; border-bottom:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;"
+            container.appendChild(titleContainer);
+
+            let authorContainer = document.createElement("div");
+            authorContainer.style.cssText = "height: auto; background: peachpuff; border-bottom:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;"
+            container.appendChild(authorContainer);
+
+            let pageContainer = document.createElement("div");
+            pageContainer.style.cssText = "height: auto; background: peachpuff; border-bottom:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;"
+            container.appendChild(pageContainer);
+
+            let readContainer = document.createElement("div");
+            readContainer.style.cssText = "height: auto; background: peachpuff; border-bottom:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;"
+            container.appendChild(readContainer);
+
+            for(let key in myLibrary[i]){
+                if(key === "title"){
+                    titleContainer.textContent = `Title: ${myLibrary[i].title}`;
+                }
+                
+                if(key === "author"){
+                    authorContainer.textContent = `Author: ${myLibrary[i].author}`;
+                }
+                
+                if(key === "pages"){
+                    pageContainer.textContent = `Pages: ${myLibrary[i].pages}`;
+                }
+                
+                if(key === "read"){
+                    readContainer.textContent = `Read: ${myLibrary[i].read}`;
+                }
+                
+            }
+        }
+
         
+
 
         
     </script>
