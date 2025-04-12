@@ -13,7 +13,31 @@
 
     </div>
     
-    
+    <button id="showDialog">Add New Book</button>
+    <dialog>
+      <p>Enter Book information</p>
+      <form method="dialog">
+        <div>
+          <label for="title">Title: </label>
+          <input type="text" id="title" required>
+        </div>
+        <div>
+          <label for="author">Author: </label>
+          <input type="text" id="author" required>
+        </div>
+        <div>
+          <label for="pages">Pages: </label>
+          <input type="number" id="pages" required>
+        </div>
+        <div>
+          <label for="read">Read/Not Read: </label>
+          <input type="text" id="read" required>
+        </div>
+        <button type="submit" id="confirm">Confirm</button>
+        <button id="cancel">Cancel</button>
+      </form>
+    </dialog>
+
     <script>
         const myLibrary = [
   {
@@ -96,7 +120,7 @@
           this.read = read;  
         }
         //Book.prototype.info = function(){
-        //    return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read} yet`;
+          //  return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read} yet`;
         //};
 
         function addBookToLibrary(title, author, pages, read){
@@ -149,7 +173,60 @@
             }
         }
 
+        const showButton = document.getElementById("showDialog");
+        const cancelButton = document.getElementById("cancel");
+        const confirmButton = document.getElementById("confirm");
+        const dialogBox = document.querySelector("dialog");
+        const bookTitle = document.getElementById("title");
+        const bookAuthor = document.getElementById("author");
+        const bookPages = document.getElementById("pages");
+        const bookRead = document.getElementById("read");
+
+        showButton.addEventListener("click", () => {
+          dialogBox.showModal();
+        });
+
+        cancelButton.addEventListener("click", () => {
+          dialogBox.close();
+        });
         
+        confirmButton.addEventListener("click", (event) => {
+          event.preventDefault();
+
+          let bookTitleValue = bookTitle.value;
+          let bookAuthorValue = bookAuthor.value;
+          let bookPagesValue = bookPages.value;
+          let bookReadValue = bookRead.value;
+          
+          addBookToLibrary(bookTitleValue, bookAuthorValue, bookPagesValue, bookReadValue);
+
+          let container = document.createElement("div");
+          container.style.cssText = "flex: 1 1 200px; display: flex; min-width: 150px; flex-direction: column;";
+          container.style.border = "1px solid red";
+          mainDiv.appendChild(container);
+
+          let titleContainer = document.createElement("div");
+          titleContainer.style.cssText = "height: auto; background: peachpuff; border-bottom:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;"
+          container.appendChild(titleContainer);
+
+          let authorContainer = document.createElement("div");
+          authorContainer.style.cssText = "height: auto; background: peachpuff; border-bottom:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;"
+          container.appendChild(authorContainer);
+
+          let pageContainer = document.createElement("div");
+          pageContainer.style.cssText = "height: auto; background: peachpuff; border-bottom:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;"
+          container.appendChild(pageContainer);
+
+          let readContainer = document.createElement("div");
+          readContainer.style.cssText = "height: auto; background: peachpuff; border-bottom:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;"
+          container.appendChild(readContainer);
+          
+          titleContainer.textContent = `Title: ${bookTitleValue}`;
+          authorContainer.textContent = `Author: ${bookAuthorValue}`;
+          pageContainer.textContent = `Pages: ${bookPagesValue}`;
+          readContainer.textContent = `Read: ${bookReadValue}`;
+          dialogBox.close();
+        });
 
 
         
