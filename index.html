@@ -132,8 +132,10 @@
 
         let mainDiv = document.getElementById("main-container");
         for (let i = 0; i < myLibrary.length; i++){
+            //let id = myLibrary[i].id;
             let container = document.createElement("div");
             container.style.cssText = "flex: 1 1 200px; display: flex; min-width: 150px; flex-direction: column;";
+            //div.setAttribute("data-id", `${myLibrary[i].id}`);
             container.style.border = "1px solid red";
             mainDiv.appendChild(container);
 
@@ -152,6 +154,15 @@
             let readContainer = document.createElement("div");
             readContainer.style.cssText = "height: auto; background: peachpuff; border-bottom:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;"
             container.appendChild(readContainer);
+
+            let buttonContainer = document.createElement("div");
+            buttonContainer.style.cssText = "display: flex; height: auto; background: peachpuff; border-bottom:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;";
+            let removeBook = document.createElement("button");
+            container.appendChild(buttonContainer);
+            removeBook.style.cssText = "height: auto; border:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;";
+            removeBook.textContent = "Remove Book";
+            removeBook.dataset.id = myLibrary[i].id;
+            buttonContainer.appendChild(removeBook);
 
             for(let key in myLibrary[i]){
                 if(key === "title"){
@@ -227,6 +238,19 @@
           readContainer.textContent = `Read: ${bookReadValue}`;
           dialogBox.close();
         });
+
+        let buttonList = document.querySelectorAll("button");
+        buttonList.forEach(button => {
+          if(button.dataset.id){
+            button.addEventListener("click", event => {
+              for(let i = 0; i < myLibrary.length; i++){
+                if(event.target.dataset.id === myLibrary[i].id){
+                  myLibrary.splice(i,1);
+                }
+              }
+            })
+          }
+        })
 
 
         
