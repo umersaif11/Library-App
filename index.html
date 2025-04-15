@@ -9,108 +9,40 @@
 </head>
 <body>
 
+  <div class="window-container">
     <div id="main-container">
 
     </div>
     
-    <button id="showDialog">Add New Book</button>
-    <dialog>
-      <p>Enter Book information</p>
-      <form method="dialog">
-        <div>
-          <label for="title">Title: </label>
-          <input type="text" id="title" required>
-        </div>
-        <div>
-          <label for="author">Author: </label>
-          <input type="text" id="author" required>
-        </div>
-        <div>
-          <label for="pages">Pages: </label>
-          <input type="number" id="pages" required>
-        </div>
-        <div>
-          <label for="read">Read/Not Read: </label>
-          <input type="text" id="read" required>
-        </div>
-        <button type="submit" id="confirm">Confirm</button>
-        <button id="cancel">Cancel</button>
-      </form>
-    </dialog>
-
+    <div class="button-container">
+        <button id="showDialog">Add New Book</button>
+        <dialog>
+          <p>Enter Book information</p>
+          <form method="dialog">
+            <div>
+              <label for="title">Title: </label>
+              <input type="text" id="title" required>
+            </div>
+            <div>
+              <label for="author">Author: </label>
+              <input type="text" id="author" required>
+            </div>
+            <div>
+              <label for="pages">Pages: </label>
+              <input type="number" id="pages" required>
+            </div>
+            <div>
+              <label for="read">Read/Not Read: </label>
+              <input type="text" id="read" required>
+            </div>
+            <button type="submit" id="confirm">Confirm</button>
+            <button id="cancel">Cancel</button>
+          </form>
+        </dialog>
+    </div>
+  </div>
     <script>
-        const myLibrary = [
-  {
-    id: crypto.randomUUID(),
-    title: "To Kill a Mockingbird",
-    author: "Harper Lee",
-    pages: 281,
-    read: "Read"
-  },
-  {
-    id: crypto.randomUUID(),
-    title: "1984",
-    author: "George Orwell",
-    pages: 328,
-    read: "Read"
-  },
-  {
-    id: crypto.randomUUID(),
-    title: "Pride and Prejudice",
-    author: "Jane Austen",
-    pages: 432,
-    read: "Read"
-  },
-  {
-    id: crypto.randomUUID(),
-    title: "The Great Gatsby",
-    author: "F. Scott Fitzgerald",
-    pages: 180,
-    read: "Not Read"
-  },
-  {
-    id: crypto.randomUUID(),
-    title: "The Catcher in the Rye",
-    author: "J.D. Salinger",
-    pages: 234,
-    read: "Read"
-  },
-  {
-    id: crypto.randomUUID(),
-    title: "Harry Potter and the Sorcerer's Stone",
-    author: "J.K. Rowling",
-    pages: 309,
-    read: "Read"
-  },
-  {
-    id: crypto.randomUUID(),
-    title: "The Lord of the Rings",
-    author: "J.R.R. Tolkien",
-    pages: 1178,
-    read: "Currently Reading"
-  },
-  {
-    id: crypto.randomUUID(),
-    title: "The Little Prince",
-    author: "Antoine de Saint-Exupéry",
-    pages: 96,
-    read: "Read"
-  },
-  {
-    id: crypto.randomUUID(),
-    title: "The Alchemist",
-    author: "Paulo Coelho",
-    pages: 197,
-    read: "Read"
-  },
-  {
-    id: crypto.randomUUID(),
-    title: "One Hundred Years of Solitude",
-    author: "Gabriel García Márquez",
-    pages: 417,
-    read: "Not Read"
-  }
-];
+        const myLibrary = [];
 
         function Book(title, author, pages, read){
           this.id = crypto.randomUUID();  
@@ -119,15 +51,30 @@
           this.pages = pages;
           this.read = read;  
         }
-        //Book.prototype.info = function(){
-          //  return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read} yet`;
-        //};
+        Book.prototype.toggle = function(){
+            if(this.read.toUpperCase() === "READ"){
+              return this.read = "Not Read";
+            } else if(this.read.toUpperCase() === "NOT READ"){
+              return this.read = "Read";
+            }
+        };
 
         function addBookToLibrary(title, author, pages, read){
            return myLibrary.push(new Book(title, author, pages, read));
         } 
 
-        console.log(addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', 295, 'not read'));
+        addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', 295, 'Not Read');
+        addBookToLibrary(' To Kill a Mockingbird', 'Harper Lee', 281, 'Read');
+        addBookToLibrary('The Hitchhiker\'s Guide to the Galaxy', 'Douglas Adams', 224, 'Read');
+        addBookToLibrary('The Da Vinci Code', 'Dan Brown', 464, 'Read');
+        addBookToLibrary('Gone with the Wind', 'Margaret Mitchell', 1037, 'Not Read');
+        addBookToLibrary('Moby Dick', 'Herman Melville', 635, 'Not Read');
+        addBookToLibrary('Little Women', 'Louisa May Alcott', 541, 'Read');
+        addBookToLibrary('Animal Farm', 'George Orwell', 112, 'Read');
+        addBookToLibrary('The Adventures of Sherlock Holmes', 'Arthur Conan Doyle', 307, 'Read');
+        addBookToLibrary('The Picture of Dorian Gray', 'Oscar Wilde', 256, 'Not Read');
+        addBookToLibrary('The Count of Monte Cristo', 'Alexandre Dumas', 1276, 'Not Read');
+        
         //console.log(myLibrary[0].info());
 
         let mainDiv = document.getElementById("main-container");
@@ -163,6 +110,15 @@
             removeBook.textContent = "Remove Book";
             removeBook.dataset.id = myLibrary[i].id;
             buttonContainer.appendChild(removeBook);
+
+            let toggleContainer = document.createElement("div");
+            toggleContainer.style.cssText = "display: flex; height: auto; background: peachpuff; border-bottom:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;";
+            let toggleRead = document.createElement("button");
+            container.appendChild(toggleContainer);
+            toggleRead.style.cssText = "height: auto; border:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;";
+            toggleRead.textContent = "Toggle Read Status";
+            toggleRead.dataset.id = myLibrary[i].id;
+            toggleContainer.appendChild(toggleRead);
 
             for(let key in myLibrary[i]){
                 if(key === "title"){
@@ -231,6 +187,24 @@
           let readContainer = document.createElement("div");
           readContainer.style.cssText = "height: auto; background: peachpuff; border-bottom:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;"
           container.appendChild(readContainer);
+
+          let buttonContainer = document.createElement("div");
+          buttonContainer.style.cssText = "display: flex; height: auto; background: peachpuff; border-bottom:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;";
+          let removeBook = document.createElement("button");
+          container.appendChild(buttonContainer);
+          removeBook.style.cssText = "height: auto; border:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;";
+          removeBook.textContent = "Remove Book";
+          removeBook.dataset.id = myLibrary[myLibrary.length - 1].id;
+          buttonContainer.appendChild(removeBook);
+
+          let toggleContainer = document.createElement("div");
+          toggleContainer.style.cssText = "display: flex; height: auto; background: peachpuff; border-bottom:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;";
+          let toggleRead = document.createElement("button");
+          container.appendChild(toggleContainer);
+          toggleRead.style.cssText = "height: auto; border:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;";
+          toggleRead.textContent = "Toggle Read Status";
+          toggleRead.dataset.id = myLibrary[myLibrary.length - 1].id;
+          toggleContainer.appendChild(toggleRead);
           
           titleContainer.textContent = `Title: ${bookTitleValue}`;
           authorContainer.textContent = `Author: ${bookAuthorValue}`;
@@ -239,16 +213,24 @@
           dialogBox.close();
         });
 
-        let buttonList = document.querySelectorAll("button");
-        buttonList.forEach(button => {
-          if(button.dataset.id){
-            button.addEventListener("click", event => {
+        mainDiv.addEventListener("click", event => {
+          if(event.target.dataset.id && event.target.tagName === "BUTTON"){
               for(let i = 0; i < myLibrary.length; i++){
                 if(event.target.dataset.id === myLibrary[i].id){
-                  myLibrary.splice(i,1);
-                }
+                  if(event.target.textContent === "Remove Book"){
+                    myLibrary.splice(i,1);
+                    let removeButtonConatiner = event.target.parentNode;
+                    let removeButtonCard = removeButtonConatiner.parentNode;
+                    mainDiv.removeChild(removeButtonCard);
+                    break;
+                  } else if(event.target.textContent === "Toggle Read Status"){
+                    myLibrary[i].toggle();
+                    let toggleButtonContainer = event.target.parentNode;
+                    let bookCard = toggleButtonContainer.parentNode;
+                    bookCard.children[3].textContent = `Read: ${myLibrary[i].read}`;
+                  }
+                }    
               }
-            })
           }
         })
 

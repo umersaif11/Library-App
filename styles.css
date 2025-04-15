@@ -1,17 +1,131 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box; /* Prevent padding/border issues */
   }
-body{
+  
+  body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-#main-container{
-    
-    width: 700px;
+    background-color: lightgoldenrodyellow; /* Light background for contrast */
+    min-height: 100vh; /* Ensure body fills viewport */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .window-container {
+    display: grid;
+    grid-template-columns: 1fr minmax(300px, 1200px) 1fr; /* Center content with max width */
+    grid-template-rows: auto auto; /* Two rows: main content and button */
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    max-width: 1400px; /* Limit width on large screens */
+  }
+  
+  #main-container {
+    grid-column: 2 / 3; /* Center in middle column */
+    grid-row: 1 / 2;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 15px;
+    padding: 15px;
+    background-color: #fff; /* White background for cards */
+    border: 2px solid #6a0dad; /* Purple border */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+
+  .button-container {
+    grid-column: 2 / 3; /* Center in middle column */
+    grid-row: 2 / 3;
+    display: flex;
+    justify-content: center;
     padding: 10px;
-    margin: 10px;
-    border: 2px solid purple;
-}
+  }
+  
+  #showDialog {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #6a0dad; /* Purple */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  #showDialog:hover {
+    background-color: #8a2be2; /* Lighter purple */
+  }
+  
+  /* Dialog styling */
+  dialog {
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 90%;
+  }
+  
+  dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5); /* Dimmed background */
+  }
+  
+  dialog p {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+  }
+  
+  dialog form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  dialog form div {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  dialog form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  dialog form input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  dialog form button {
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  dialog form #confirm {
+    background-color: #6a0dad;
+    color: white;
+  }
+  
+  dialog form #confirm:hover {
+    background-color: #8a2be2;
+  }
+  
+  dialog form #cancel {
+    background-color: #ff4d4d;
+    color: white;
+  }
+  
+  dialog form #cancel:hover {
+    background-color: #ff6666;
+  }
