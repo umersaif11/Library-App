@@ -1,6 +1,8 @@
 const myLibrary = [];
 
-    function Book(title, author, pages, read){
+     //REFACTORING FROM PLAIN CONSTRUCTORS TO CLASSES
+
+    /*function Book(title, author, pages, read){
         this.id = crypto.randomUUID();  
         this.title = title;
         this.author = author;
@@ -13,7 +15,17 @@ const myLibrary = [];
         } else if(this.read.toUpperCase() === "NOT READ"){
             return this.read = "Read";
         }
-    };
+    };*/
+
+    class Book {
+        constructor(title, author, pages, read){
+            this.id = crypto.randomUUID();
+            this.title = title;
+            this.author = author;
+            this.pages = pages;
+            this.read = read;
+        }
+    }
 
     function addBookToLibrary(title, author, pages, read){
         return myLibrary.push(new Book(title, author, pages, read));
