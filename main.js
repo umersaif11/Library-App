@@ -25,6 +25,14 @@ const myLibrary = [];
             this.pages = pages;
             this.read = read;
         }
+
+        toggle(){
+            if(this.read.toUpperCase() === 'READ'){
+                return this.read = 'Not Read';
+            } else if(this.read.toUpperCase() === 'NOT READ'){
+                return this.read = 'Read';
+            }
+        }
     }
 
     function addBookToLibrary(title, author, pages, read){
