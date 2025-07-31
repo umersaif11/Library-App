@@ -42,6 +42,7 @@
     display: flex;
     justify-content: center;
     padding: 10px;
+    position: relative;
   }
   
   #showDialog {
@@ -69,6 +70,9 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     max-width: 400px;
     width: 90%;
+    position: absolute;
+    left: 30%;
+    top: 20%;
   }
   
   dialog::backdrop {
@@ -128,4 +132,10 @@
   
   dialog form #cancel:hover {
     background-color: #ff6666;
+  }
+  @media (max-width: 700px){
+    dialog{
+      top: 0%;
+      left: 0%
+    }
   }
