@@ -120,6 +120,7 @@ const myLibrary = [];
     const cancelButton = document.getElementById("cancel");
     const confirmButton = document.getElementById("confirm");
     const dialogBox = document.querySelector("dialog");
+    const bookForm = document.getElementById("book-form");
     const bookTitle = document.getElementById("title");
     const bookAuthor = document.getElementById("author");
     const bookPages = document.getElementById("pages");
@@ -136,57 +137,61 @@ const myLibrary = [];
     confirmButton.addEventListener("click", (event) => {
         event.preventDefault();
 
-        let bookTitleValue = bookTitle.value;
-        let bookAuthorValue = bookAuthor.value;
-        let bookPagesValue = bookPages.value;
-        let bookReadValue = bookRead.value;
-        
-        addBookToLibrary(bookTitleValue, bookAuthorValue, bookPagesValue, bookReadValue);
+        if(!bookForm.checkValidity()){
+            bookForm.reportValidity();
+        } else {
+            let bookTitleValue = bookTitle.value;
+            let bookAuthorValue = bookAuthor.value;
+            let bookPagesValue = bookPages.value;
+            let bookReadValue = bookRead.value;
+            
+            addBookToLibrary(bookTitleValue, bookAuthorValue, bookPagesValue, bookReadValue);
 
-        let container = document.createElement("div");
-        container.style.cssText = "flex: 1 1 200px; display: flex; min-width: 150px; flex-direction: column;";
-        container.style.border = "1px solid red";
-        mainDiv.appendChild(container);
+            let container = document.createElement("div");
+            container.style.cssText = "flex: 1 1 200px; display: flex; min-width: 150px; flex-direction: column;";
+            container.style.border = "1px solid red";
+            mainDiv.appendChild(container);
 
-        let titleContainer = document.createElement("div");
-        titleContainer.style.cssText = "height: auto; background: peachpuff; border-bottom:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;"
-        container.appendChild(titleContainer);
+            let titleContainer = document.createElement("div");
+            titleContainer.style.cssText = "height: auto; background: peachpuff; border-bottom:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;"
+            container.appendChild(titleContainer);
 
-        let authorContainer = document.createElement("div");
-        authorContainer.style.cssText = "height: auto; background: peachpuff; border-bottom:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;"
-        container.appendChild(authorContainer);
+            let authorContainer = document.createElement("div");
+            authorContainer.style.cssText = "height: auto; background: peachpuff; border-bottom:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;"
+            container.appendChild(authorContainer);
 
-        let pageContainer = document.createElement("div");
-        pageContainer.style.cssText = "height: auto; background: peachpuff; border-bottom:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;"
-        container.appendChild(pageContainer);
+            let pageContainer = document.createElement("div");
+            pageContainer.style.cssText = "height: auto; background: peachpuff; border-bottom:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;"
+            container.appendChild(pageContainer);
 
-        let readContainer = document.createElement("div");
-        readContainer.style.cssText = "height: auto; background: peachpuff; border-bottom:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;"
-        container.appendChild(readContainer);
+            let readContainer = document.createElement("div");
+            readContainer.style.cssText = "height: auto; background: peachpuff; border-bottom:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;"
+            container.appendChild(readContainer);
 
-        let buttonContainer = document.createElement("div");
-        buttonContainer.style.cssText = "display: flex; height: auto; background: peachpuff; border-bottom:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;";
-        let removeBook = document.createElement("button");
-        container.appendChild(buttonContainer);
-        removeBook.style.cssText = "height: auto; border:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;";
-        removeBook.textContent = "Remove Book";
-        removeBook.dataset.id = myLibrary[myLibrary.length - 1].id;
-        buttonContainer.appendChild(removeBook);
+            let buttonContainer = document.createElement("div");
+            buttonContainer.style.cssText = "display: flex; height: auto; background: peachpuff; border-bottom:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;";
+            let removeBook = document.createElement("button");
+            container.appendChild(buttonContainer);
+            removeBook.style.cssText = "height: auto; border:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;";
+            removeBook.textContent = "Remove Book";
+            removeBook.dataset.id = myLibrary[myLibrary.length - 1].id;
+            buttonContainer.appendChild(removeBook);
 
-        let toggleContainer = document.createElement("div");
-        toggleContainer.style.cssText = "display: flex; height: auto; background: peachpuff; border-bottom:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;";
-        let toggleRead = document.createElement("button");
-        container.appendChild(toggleContainer);
-        toggleRead.style.cssText = "height: auto; border:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;";
-        toggleRead.textContent = "Toggle Read Status";
-        toggleRead.dataset.id = myLibrary[myLibrary.length - 1].id;
-        toggleContainer.appendChild(toggleRead);
-        
-        titleContainer.textContent = `Title: ${bookTitleValue}`;
-        authorContainer.textContent = `Author: ${bookAuthorValue}`;
-        pageContainer.textContent = `Pages: ${bookPagesValue}`;
-        readContainer.textContent = `Read: ${bookReadValue}`;
-        dialogBox.close();
+            let toggleContainer = document.createElement("div");
+            toggleContainer.style.cssText = "display: flex; height: auto; background: peachpuff; border-bottom:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;";
+            let toggleRead = document.createElement("button");
+            container.appendChild(toggleContainer);
+            toggleRead.style.cssText = "height: auto; border:1px solid brown; flex: 1 0 auto; padding: 5px; font-weight: bold;";
+            toggleRead.textContent = "Toggle Read Status";
+            toggleRead.dataset.id = myLibrary[myLibrary.length - 1].id;
+            toggleContainer.appendChild(toggleRead);
+            
+            titleContainer.textContent = `Title: ${bookTitleValue}`;
+            authorContainer.textContent = `Author: ${bookAuthorValue}`;
+            pageContainer.textContent = `Pages: ${bookPagesValue}`;
+            readContainer.textContent = `Read: ${bookReadValue}`;
+            dialogBox.close();
+            }
     });
 
     mainDiv.addEventListener("click", event => {
